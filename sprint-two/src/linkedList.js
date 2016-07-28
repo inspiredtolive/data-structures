@@ -31,6 +31,26 @@ var LinkedList = function() {
     return has;
   };
 
+  list.getHead = function() {
+    return list.head;
+  };
+
+  list.getValue = function(key) {
+    var value;
+    var searchNode = function (node) {
+      if (node.value.hasOwnProperty(key)) {
+        value = node.value[key];
+      } else if (node.next !== null) {
+        searchNode(node.next);
+      }
+    };
+    if (list.head === null) {
+      return undefined;
+    }
+    searchNode(list.head);
+    return value;
+  };
+
   return list;
 };
 
