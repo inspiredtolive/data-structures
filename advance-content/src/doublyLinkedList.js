@@ -15,7 +15,20 @@ DoublyLinkedList.prototype.addToHead = function (value) {
   }
 };
 
-DoublyLinkedList.prototype.removeTail = function () {};
+DoublyLinkedList.prototype.removeTail = function () {
+  var formerTail;
+  if (this.tail !== null) {
+    formerTail = this.tail.value;
+    this.tail = this.tail.prev;
+    // if no more items in list, point head to null
+    if (this.tail === null) {
+      this.head = null;
+    } else {
+      this.tail.next = null;
+    }
+  }
+  return formerTail;
+};
 
 var Node = function(value) {
   var obj = {};
