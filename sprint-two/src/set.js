@@ -1,18 +1,17 @@
 var Set = function() {
   var set = Object.create(Set.prototype);
-  set._storage = {};
-  set.counter = 0;
+  set._storage = [];
   return set;
 };
 
 Set.prototype.add = function(item) {
-  this.counter++;
-  this._storage[this.counter] = item;
+  this._storage.push(item);
 };
 
 Set.prototype.contains = function(item) {
   return _.contains(this._storage, item);
-};
+};   
+
 
 Set.prototype.remove = function(item) {
   this._storage = _.reject(this._storage, function (value) {
