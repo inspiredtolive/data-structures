@@ -55,4 +55,14 @@ describe('tree', function() {
     expect(tree.children[0].children[0].parent.value).to.equal(tree.children[0].value);
   });
 
+  it('should have property names "removeFromParent"', function() {
+    expect(tree).to.have.property('removeFromParent');
+  });
+
+  it('should disassociates the tree from its parent', function () {
+    tree.addChild('baby');
+    tree.children[0].removeFromParent();
+    expect(tree.children.length).to.equal(0);
+  });
+
 });
