@@ -52,6 +52,20 @@ treeMethods.removeFromParent = function () {
   return removedChild;
 };
 
+treeMethods.traverse = function (callback) {
+
+  var searchTree = function (allTrees) {
+    if (allTrees.value !== undefined) {
+      callback(allTrees.value);
+    }
+    if (allTrees.children.length > 0) {
+      _.each(allTrees.children, searchTree);
+    }
+  };
+  searchTree(this);
+
+};
+
 
 
 /*

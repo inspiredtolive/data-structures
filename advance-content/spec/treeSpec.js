@@ -41,6 +41,8 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  // advance content
+
   it('should have property named "parent"', function() {
     expect(tree).to.have.property('parent');
   });
@@ -64,5 +66,31 @@ describe('tree', function() {
     tree.children[0].removeFromParent();
     expect(tree.children.length).to.equal(0);
   });
+
+  it('should have a method named "traverse"', function () {
+    expect(tree).to.have.property('traverse');
+  });
+
+  it('should execute callback on every value', function () {
+    var counter = 0;
+    var callback = function() { counter++; };
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    tree.traverse(callback);
+    expect(counter).to.equal(4);
+  });
+
+  it('should execute callback with an argument', function () {
+    var names = [];
+    var getNames = function(name) { names.push(name); };
+    tree.addChild('Bill');
+    tree.addChild('Bob');
+    tree.children[0].addChild('Marcus');
+    tree.children[1].addChild('Allen');
+    tree.traverse(getNames);
+    expect(_.contains(names, 'Marcus')).to.equal(true);
+  });  
 
 });
